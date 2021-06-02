@@ -7,7 +7,8 @@ export class Game {
         this.newGameBtn = document.getElementById("btn-new");
         this.rollDiceBtn = document.getElementById("btn-roll");
         this.instructionsTxt = document.querySelector(".instructions");
-        this.diceOneDisplay = document.getElementById("diceOne");
+        this.hasStarted = false;
+        this.diceArr = [];
 
     }
 
@@ -15,8 +16,21 @@ export class Game {
         // display instructions
         this.instructionsTxt.style.display = "block";
         //make roll dice button active
+        this.hasStarted = true;
 
         // LATER: display score card
+    }
+
+    createDice() {
+        //make 5 dice and roll them
+        for (let i = 0; i < 5; i++) {
+            //console.log(i);
+            let dice = new Dice();
+            dice.roll();
+            this.diceArr.push(dice);
+            console.log(this.diceArr); //BUG: every roll adds 5 more dice... need to remove the previous ones
+        }
+
     }
 
 }
@@ -36,6 +50,9 @@ game.newGameBtn.addEventListener('click', function () {
 game.rollDiceBtn.addEventListener('click', function () {
     //console.log("clicked roll dice");
     //IF start new game has not been pressed, rolldice button should be inactive
-    diceOne.roll();
+    if (game.hasStarted) {
+        game.createDice();
+        //diceOne.roll();
+    }
 
 });
