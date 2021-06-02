@@ -1,0 +1,42 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-size: 14px;;
+}
+
+.flex-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.new-game {
+    padding: 10px 20px;
+}
+
+.dice-area {
+    width: 50%;
+    height: 50vh;
+    background-color: darkolivegreen;
+    border: 1px solid darkolivegreen;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.roll-dice {
+    padding-top: 300px;
+
+}
+
+
+
+.scoreboard-area {
+    width: 50%;
+    height: 50vh;
+    background-color: burlywood;
+    border: 1px solid burlywood;
+    border-radius: 10px;
+    text-align: center;
+}
