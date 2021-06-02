@@ -25,12 +25,14 @@ body {
     justify-content: flex-start;
 }
 
-.roll-dice {
-    padding-top: 300px;
-
+.dices > img {
+    display: none;
 }
 
-
+.instructions {
+    display: none;
+    text-align: center;
+}
 
 .scoreboard-area {
     width: 50%;
