@@ -1,6 +1,5 @@
 export default class Dice {
-    constructor(game) { //remove game as key, create the dice element in the DOM here
-        this.game = game;
+    constructor() {
         this.value = 0; //store the random value after rollDice here
         this.isLocked = false; //turns to true if this dice is locked
         this.diceDiv = document.querySelector(".dices");
@@ -8,7 +7,6 @@ export default class Dice {
     }
 
     roll() {
-        console.log("roll the dice");
         if (!this.isLocked) {
             //pick a random number between 1 - §
             let currentValue = Math.floor(Math.random() * 6) + 1;
@@ -29,8 +27,8 @@ export default class Dice {
         //change the img (value).png in the html
         this.diceImg.src = `img\/${value}\.png`
         //set img to visible
-        this.diceImg.style.display = "inline"; //LATER: how to add multiple dice??
-        console.log(this.value);
+        this.diceImg.style.display = "inline";
+        //console.log(this.value);
 
     }
 

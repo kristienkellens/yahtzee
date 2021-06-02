@@ -22,14 +22,23 @@ export class Game {
     }
 
     createDice() {
-        //make 5 dice and roll them
+        //remove previous dice
+        if (this.diceArr.length > 0) {
+            this.diceArr = [];
+            document.querySelector(".dices").innerHTML = "";
+        }
+
+        //make 5 dice
         for (let i = 0; i < 5; i++) {
             //console.log(i);
-            let dice = new Dice();
-            dice.roll();
-            this.diceArr.push(dice);
-            console.log(this.diceArr); //BUG: every roll adds 5 more dice... need to remove the previous ones
+            this.diceArr.push(new Dice());
         }
+
+        //roll each dice
+        this.diceArr.forEach(dice => {
+            dice.roll();
+
+        });
 
     }
 
@@ -37,10 +46,10 @@ export class Game {
 
 
 
-//dice
+//start game
 let game = new Game();
-let diceOne = new Dice(game);
 
+//eventlisteners: probably move in separate js file later
 game.newGameBtn.addEventListener('click', function () {
     //console.log("clicked new game");
     game.start();
@@ -52,7 +61,9 @@ game.rollDiceBtn.addEventListener('click', function () {
     //IF start new game has not been pressed, rolldice button should be inactive
     if (game.hasStarted) {
         game.createDice();
-        //diceOne.roll();
+        console.log(game.diceArr); //check if dice value is kept
     }
 
 });
+
+//check diceArr
