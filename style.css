@@ -42,3 +42,10 @@ body {
     border-radius: 10px;
     text-align: center;
 }
+
+
+
+.rolled{
+    border: 1px solid red;
+    width: 63px;
+}

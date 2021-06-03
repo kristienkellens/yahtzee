@@ -66,4 +66,11 @@ game.rollDiceBtn.addEventListener('click', function () {
 
 });
 
-//check diceArr
+document.querySelector(".dices").addEventListener('click', function (e) {
+    const target = e.target;
+
+    if (target.matches("img")) {
+        target.classList.add("rolled");
+        console.log(target.value);//value of the dice, LATER: store in a new array for scorecard
+    }
+})
