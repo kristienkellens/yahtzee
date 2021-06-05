@@ -1,9 +1,10 @@
 export default class Dice {
-    constructor() {
+    constructor(index) {
+        this.index = index; //index of array "dice-nr-id"
         this.value = 0; //store the random value after rollDice here
         this.isLocked = false; //turns to true if this dice is locked
         this.diceDiv = document.querySelector(".dices");
-        this.diceImg = undefined; //see create()
+        this.diceImg = undefined; //see display()
     }
 
     roll() {
@@ -24,22 +25,16 @@ export default class Dice {
 
     }
 
-    display(value) {
-        //change the img (value).png in the html
-        this.diceImg.src = `img\/${value}\.png`;
-        this.diceImg.value = value; //TEST if it stores the value in the img
+    display() {
+        //change the img in the html + add index and value
+        this.diceImg.src = `img\/${this.value}\.png`;
+        this.diceImg.setAttribute("data-value", this.value);
+        this.diceImg.setAttribute("data-index", this.index);
+
         //set img to visible
         this.diceImg.style.display = "inline";
         //console.log(this.value);
 
     }
 
-    lockDice() {
-        //store the random number
-
-        //change appearance of this dice: make smaller and add red border
-        this.diceImg.classList.add("rolled"); //TEST add a class to add event delegation lock()
-        //set isLocked to true
-        this.isLocked = true;
-    }
 }

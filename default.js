@@ -7,6 +7,7 @@ export class Game {
         this.newGameBtn = document.getElementById("btn-new");
         this.rollDiceBtn = document.getElementById("btn-roll");
         this.instructionsTxt = document.querySelector(".instructions");
+        this.diceArea = document.querySelector(".dice-area");
         this.hasStarted = false;
         this.diceArr = [];
 
@@ -22,25 +23,43 @@ export class Game {
     }
 
     createDice() {
-        //remove previous dice
-        if (this.diceArr.length > 0) {
-            this.diceArr = [];
-            document.querySelector(".dices").innerHTML = "";
-        }
+        //on first throw
+        if (this.diceArr.length === 0) {
+            //make 5 dice
+            for (let i = 0; i < 5; i++) {
+                //console.log(i);
+                this.diceArr.push(new Dice(i));
+            }
 
-        //make 5 dice
-        for (let i = 0; i < 5; i++) {
-            //console.log(i);
-            this.diceArr.push(new Dice());
-        }
+            //roll each dice
+            this.diceArr.forEach(dice => {
+                dice.roll();
+            });
+        } else {
+            //FOR EACH item in array where isLocked is true, skip. When isLocked is false, dice.roll()
+        })
 
-        //roll each dice
-        this.diceArr.forEach(dice => {
-            dice.roll();
 
-        });
+        //NOT NEEDED, this will empty array and remove imgs
+        //this.diceArr = [];
+        //document.querySelector(".dices").innerHTML = "";
 
     }
+    /*
+    if (this.diceArr.length > 0) {
+        this.diceArr = [];
+        document.querySelector(".dices").innerHTML = "";
+    }
+    //LATER: if dice isLocked, keep in array
+    /*this.diceArr.forEach(item => {
+        item.isLocked
+    })*/
+
+
+
+
+
+}
 
 }
 
@@ -59,18 +78,29 @@ game.newGameBtn.addEventListener('click', function () {
 game.rollDiceBtn.addEventListener('click', function () {
     //console.log("clicked roll dice");
     //IF start new game has not been pressed, rolldice button should be inactive
+    console.log(game.diceArr);
+
     if (game.hasStarted) {
         game.createDice();
-        console.log(game.diceArr); //check if dice value is kept
+        //console.log(game.diceArr);
     }
 
 });
 
-document.querySelector(".dices").addEventListener('click', function (e) {
+game.diceArea.addEventListener('click', function (e) {
     const target = e.target;
 
-    if (target.matches("img")) {
+    if (target.dataset.value !== undefined) {
+        //add correct CSS
         target.classList.add("rolled");
-        console.log(target.value);//value of the dice, LATER: store in a new array for scorecard
+
+        //change isLocked to true in diceArr
+        //console.log(game.diceArr[target.dataset.index]);
+        //console.log(game.diceArr[target.dataset.index].isLocked);
+        game.diceArr[target.dataset.index].isLocked = true;
+        console.log(game.diceArr);
+
+        //LATER: toggle?
+        //LATER: store in a new array for scorecard
     }
 })
