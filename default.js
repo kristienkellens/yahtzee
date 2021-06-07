@@ -37,31 +37,43 @@ export class Game {
             });
         } else {
             //FOR EACH item in array where isLocked is true, skip. When isLocked is false, dice.roll()
-        })
-
-
-        //NOT NEEDED, this will empty array and remove imgs
-        //this.diceArr = [];
-        //document.querySelector(".dices").innerHTML = "";
-
+            this.diceArr.forEach(dice => {
+                //console.log(dice.isLocked);
+                this.keepLockedDice(dice);
+            })
+        }
     }
-    /*
-    if (this.diceArr.length > 0) {
-        this.diceArr = [];
-        document.querySelector(".dices").innerHTML = "";
+
+    keepLockedDice(dice) {
+        if (!dice.isLocked) {
+            dice.roll();
+
+        }
     }
-    //LATER: if dice isLocked, keep in array
-    /*this.diceArr.forEach(item => {
-        item.isLocked
-    })*/
 
 
-
-
+    //NOT NEEDED, this will empty array and remove imgs
+    //this.diceArr = [];
+    //document.querySelector(".dices").innerHTML = "";
 
 }
-
+/*
+if (this.diceArr.length > 0) {
+    this.diceArr = [];
+    document.querySelector(".dices").innerHTML = "";
 }
+//LATER: if dice isLocked, keep in array
+/*this.diceArr.forEach(item => {
+    item.isLocked
+})*/
+
+
+
+
+
+
+
+
 
 
 
