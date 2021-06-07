@@ -1,7 +1,7 @@
 export default class Dice {
     constructor(index) {
-        this.index = index; //index of array "dice-nr-id"
-        this.value = 0; //store the random value after rollDice here
+        this.index = index; //index of array game.diceArr
+        this.value = 0; //random value 1-6 after rolling the dice
         this.isLocked = false; //turns to true if this dice is locked
         this.diceDiv = document.querySelector(".dices");
         this.diceImg = undefined; //see display()
@@ -9,7 +9,7 @@ export default class Dice {
 
     roll() {
         if (!this.isLocked) {
-            //pick a random number between 1 - §
+            //pick a random number between 1 - 6
             let currentValue = Math.floor(Math.random() * 6) + 1;
             this.value = currentValue;
             if (this.diceImg === undefined) { //else it will create a new dice on each roll
@@ -19,7 +19,7 @@ export default class Dice {
         }
     }
 
-    create() {
+    create() { //create dice object in DOM
         const img = document.createElement("img");
         this.diceImg = this.diceDiv.appendChild(img);
 

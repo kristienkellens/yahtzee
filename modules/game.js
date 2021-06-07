@@ -14,12 +14,11 @@ export default class Game {
     }
 
     start() {
+        if (this.hasStarted) { window.location.reload(); };
         // display instructions
         this.instructionsTxt.style.display = "block";
         //make roll dice button active
         this.hasStarted = true;
-
-        // LATER: display score card
     }
 
     createDice() {

@@ -15,7 +15,7 @@ body {
 
 .dice-area {
     width: 50%;
-    height: 50vh;
+    height: 100vh;
     background-color: darkolivegreen;
     border: 1px solid darkolivegreen;
     border-radius: 10px;
@@ -25,25 +25,20 @@ body {
     justify-content: flex-start;
 }
 
-.dices > img {
-    display: none;
-}
-
 .instructions {
     display: none;
     text-align: center;
+    padding-bottom: 20px;
 }
 
 .scoreboard-area {
     width: 50%;
-    height: 50vh;
+    height: 100vh;
     background-color: burlywood;
     border: 1px solid burlywood;
     border-radius: 10px;
     text-align: center;
 }
-
-
 
 .rolled{
     border: 1px solid red;
