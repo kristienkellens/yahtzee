@@ -28,7 +28,12 @@ body {
 .instructions {
     display: none;
     text-align: center;
-    padding-bottom: 20px;
+    padding-bottom 20px;
+}
+
+.rolled{
+    border: 1px solid red;
+    width: 63px;
 }
 
 .scoreboard-area {
@@ -40,7 +45,30 @@ body {
     text-align: center;
 }
 
-.rolled{
-    border: 1px solid red;
-    width: 63px;
+.table-score {
+    border: 1px solid black;
+    border-collapse: collapse;
+    width: 90%;
+    margin: 0 auto;
+
+
+}
+
+.table-score td {
+    border: 1px solid black;
+}
+
+.table-score tr td:nth-child(1) {
+    width: 80%;
+    text-align: left;
+}
+
+.table-score tr td:nth-child(2) {
+    width: 20%;
+}
+
+.row-totals {
+    font-weight: bold;
+    text-transform: uppercase;
+    background-color: hsl(34, 65%, 60%);
 }
