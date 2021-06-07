@@ -1,6 +1,6 @@
 "use strict";
 
-import Dice from '/modules/dice.js';
+import Dice from './modules/dice.js';
 
 export default class Game {
     constructor() {

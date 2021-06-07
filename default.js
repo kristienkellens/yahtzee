@@ -1,6 +1,6 @@
 "use strict";
 
-import Game from '/modules/game.js';
+import Game from './modules/game.js';
 
 //start game
 let game = new Game();
