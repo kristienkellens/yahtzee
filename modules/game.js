@@ -21,7 +21,7 @@ export default class Game {
         this.instructionsTxt.style.display = "block";
         this.throwsSpan.innerText = this.throws;
 
-        //make roll dice button active
+        // make roll dice button active
         this.hasStarted = true;
     }
 
