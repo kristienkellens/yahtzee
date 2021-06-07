@@ -36,9 +36,7 @@ export class Game {
                 dice.roll();
             });
         } else {
-            //FOR EACH item in array where isLocked is true, skip. When isLocked is false, dice.roll()
             this.diceArr.forEach(dice => {
-                //console.log(dice.isLocked);
                 this.keepLockedDice(dice);
             })
         }
@@ -47,25 +45,10 @@ export class Game {
     keepLockedDice(dice) {
         if (!dice.isLocked) {
             dice.roll();
-
         }
     }
-
-
-    //NOT NEEDED, this will empty array and remove imgs
-    //this.diceArr = [];
-    //document.querySelector(".dices").innerHTML = "";
-
 }
-/*
-if (this.diceArr.length > 0) {
-    this.diceArr = [];
-    document.querySelector(".dices").innerHTML = "";
-}
-//LATER: if dice isLocked, keep in array
-/*this.diceArr.forEach(item => {
-    item.isLocked
-})*/
+
 
 
 
@@ -80,15 +63,13 @@ if (this.diceArr.length > 0) {
 //start game
 let game = new Game();
 
-//eventlisteners: probably move in separate js file later
+//eventlisteners:  move in separate js file later?
 game.newGameBtn.addEventListener('click', function () {
-    //console.log("clicked new game");
     game.start();
 
 });
 
 game.rollDiceBtn.addEventListener('click', function () {
-    //console.log("clicked roll dice");
     //IF start new game has not been pressed, rolldice button should be inactive
     console.log(game.diceArr);
 
@@ -104,15 +85,16 @@ game.diceArea.addEventListener('click', function (e) {
 
     if (target.dataset.value !== undefined) {
         //add correct CSS
-        target.classList.add("rolled");
+        target.classList.toggle("rolled");
+        if (target.classList.contains("rolled")) {
+            //change isLocked to true in diceArr
+            game.diceArr[target.dataset.index].isLocked = true;
+        } else {
+            game.diceArr[target.dataset.index].isLocked = false;
 
-        //change isLocked to true in diceArr
-        //console.log(game.diceArr[target.dataset.index]);
-        //console.log(game.diceArr[target.dataset.index].isLocked);
-        game.diceArr[target.dataset.index].isLocked = true;
-        console.log(game.diceArr);
-
-        //LATER: toggle?
-        //LATER: store in a new array for scorecard
+        }
+        //LATER: store in a new array for scorecard?
     }
+    //console.log(game.diceArr);
+
 })
