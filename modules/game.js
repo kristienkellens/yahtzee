@@ -53,9 +53,8 @@ export default class Game {
             this.throwsSpan.innerText = this.throws;
         }
 
-        if (this.throws === 0) {
-            console.log("no more scores, build the scorecard");
-            // put the final dice values in a new array this.diceValuesArr
+        if (this.throws === 0) { // create the scorecard
+            // put the final dice values in a new array
             this.diceValuesArr = this.diceArr.map(dice => { return dice.value; })
             //console.log(this.diceValuesArr);
             this.createScorecard(this.diceValuesArr);

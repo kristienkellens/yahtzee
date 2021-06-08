@@ -1,8 +1,5 @@
 export default class Scorecard {
     constructor(diceValuesArr) {
-        this.eyes = [1, 2, 3, 4, 5, 6] // possible eyes each die can have
-        this.diceValuesArr = diceValuesArr; //simple array with the final dice values, see game.js
-
         //DOM elements
         this.onesBtn = document.getElementById("ones");
         this.twosBtn = document.getElementById("twos");
@@ -13,38 +10,37 @@ export default class Scorecard {
         this.upperTotalTd = document.getElementById("upper-total");
         this.bonusTd = document.getElementById("bonus");
 
-        //score keeping variables corresponding with DOM elements above
-        this.counter = 0;
+        //Arrays
+        this.eyes = [1, 2, 3, 4, 5, 6] // to loop over eyes per dice, see calculateUpperScore()
+        this.diceValuesArr = diceValuesArr; //simple array with the final dice values, see game.js
+        this.sums = []; // keep sums of upper scores
+        this.upperScores = [this.onesBtn, this.twosBtn, this.threesBtn, this.foursBtn, this.fivesBtn, this.sixesBtn] //display sums in upperScores
+
+        //counter used for looping over arrays
+        this.counter;
     }
 
     fillScorecard() {
         //TEST
-        this.countEyes();
-
-
-
+        this.calculateUpperScore();
 
     }
 
-    /*countOnes() {
-        let counter = 0;
-        for (let i = 0; i < this.diceValuesArr.length; i++) {
-            if (this.diceValuesArr[i] === 1) { counter++; };
-        }
-
-        this.ones = 1 * counter;
-    }*/
-
-    countEyes() {
+    calculateUpperScore() {
         for (const eye of this.eyes) {
             this.counter = 0; //reset counter
             for (let i = 0; i < this.diceValuesArr.length; i++) {
                 //console.log(eye, values[i]);
                 if (this.diceValuesArr[i] === eye) { this.counter++ };
             }
-            console.log(eye * this.counter);
+            this.sums.push(eye * this.counter);
+            //console.log(this.sums);
         }
 
+        //display the results
+        for (let i = 0; i < this.upperScores.length; i++) {
+            this.upperScores[i].innerText = this.sums[i];
+        }
 
     }
 
