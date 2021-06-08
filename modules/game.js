@@ -1,6 +1,7 @@
 "use strict";
 
 import Dice from './dice.js';
+import Scorecard from '/scorecard.js';
 
 export default class Game {
     constructor() {
@@ -12,6 +13,7 @@ export default class Game {
         this.throws = 3;
         this.hasStarted = false;
         this.diceArr = [];
+        this.diceValuesArr = []; //at last throw, map diceArr.values here
 
     }
 
@@ -49,11 +51,21 @@ export default class Game {
             this.throwsSpan.innerText = this.throws;
         }
 
+        if (this.throws === 0) {
+            console.log("no more scores, build the scorecard");
+            // map diceArr to only have the final dice values
+            // createScorecard(diceValuesArr);
+        }
+
     }
 
     keepLockedDice(dice) {
         if (!dice.isLocked) {
             dice.roll();
         }
+    }
+
+    createScorecard() {
+        new Scorecard(this.diceValuesArr);
     }
 }
