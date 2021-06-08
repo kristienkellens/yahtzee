@@ -96,3 +96,10 @@ body {
     color: black;
     cursor: default;
 }
+
+.selected, .selected:hover, .selected:disabled {
+    background-color: olivedrab;
+    color: black;
+    cursor: default;
+
+}

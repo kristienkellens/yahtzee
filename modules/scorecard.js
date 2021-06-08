@@ -18,10 +18,13 @@ export default class Scorecard {
 
         //counter used for looping over arrays
         this.counter;
+
+        //totals
+        this.upperTotal = 0;
+        this.addBonus = false;
     }
 
     fillScorecard() {
-        //TEST
         this.calculateUpperScore();
 
     }

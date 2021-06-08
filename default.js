@@ -35,8 +35,33 @@ game.diceArea.addEventListener('click', function (e) {
             game.diceArr[target.dataset.index].isLocked = false;
 
         }
-        //LATER: store in a new array for scorecard?
     }
     //console.log(game.diceArr);
+})
 
+game.scoreArea.addEventListener('click', function (e) {
+    const target = e.target;
+
+    if (target.classList.contains("btn-score") && !target.disabled) {
+        //add green class
+        target.classList.add("selected");
+        target.disabled = true;
+
+        //console.log(parseInt(target.innerText));
+
+        // add to total
+        game.scorecard.upperTotal += parseInt(target.innerText);
+        console.log(game.scorecard.upperTotal);
+
+        //display total
+        game.scorecard.upperTotalTd.innerText = game.scorecard.upperTotal;
+
+        //check if we can add the bonus
+        if (game.scorecard.upperTotal >= 63) {
+            game.scorecard.bonusTd.innerText = 63;
+            game.scorecard.addBonus = true;
+        }
+
+
+    }
 })
