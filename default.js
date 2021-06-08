@@ -3,7 +3,7 @@
 import Game from './modules/game.js';
 
 //start game
-let game = new Game();
+const game = new Game();
 
 //eventlisteners:  move in separate js file later?
 game.newGameBtn.addEventListener('click', function () {
