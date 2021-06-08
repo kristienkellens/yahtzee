@@ -28,7 +28,7 @@ body {
 .instructions {
     display: none;
     text-align: center;
-    padding-bottom 20px;
+    padding-bottom: 20px;
 }
 
 .rolled{
@@ -70,5 +70,17 @@ body {
 .row-totals {
     font-weight: bold;
     text-transform: uppercase;
+    background-color: hsl(34, 65%, 60%);
+}
+
+.btn-score {
+    background-color: burlywood;
+    width: 100%;
+    border: none; /*change to none*/
+    display: inline-block;
+    cursor: pointer;
+}
+
+.btn-score:hover {
     background-color: hsl(34, 65%, 60%);
 }
