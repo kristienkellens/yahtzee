@@ -55,7 +55,9 @@ export default class Game {
 
         if (this.throws === 0) {
             console.log("no more scores, build the scorecard");
-            // map diceArr to only have the final dice values
+            // put the final dice values in a new array this.diceValuesArr
+            this.diceValuesArr = this.diceArr.map(dice => { return dice.value; })
+            //console.log(this.diceValuesArr);
             this.createScorecard(this.diceValuesArr);
         }
 

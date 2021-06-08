@@ -13,7 +13,7 @@ game.newGameBtn.addEventListener('click', function () {
 
 game.rollDiceBtn.addEventListener('click', function () {
     //IF start new game has not been pressed, rolldice button should be inactive
-    console.log(game.diceArr);
+    //console.log(game.diceArr);
 
     if (game.hasStarted) {
         game.createDice();
