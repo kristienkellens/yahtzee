@@ -1,5 +1,6 @@
 export default class Scorecard {
     constructor(diceValuesArr) {
+        this.eyes = [1, 2, 3, 4, 5, 6] // possible eyes each die can have
         this.diceValuesArr = diceValuesArr; //simple array with the final dice values, see game.js
 
         //DOM elements
@@ -13,18 +14,37 @@ export default class Scorecard {
         this.bonusTd = document.getElementById("bonus");
 
         //score keeping variables corresponding with DOM elements above
-        this.ones = 0;
-        this.twos = 0;
-        this.threes = 0;
-        this.fours = 0;
-        this.fives = 0;
-        this.sixes = 0;
-        this.upperTotal = 0;
-        this.bonus = 0;
+        this.counter = 0;
     }
 
     fillScorecard() {
-        this.onesBtn.innerText = this.ones;
+        //TEST
+        this.countEyes();
+
+
+
+
+    }
+
+    /*countOnes() {
+        let counter = 0;
+        for (let i = 0; i < this.diceValuesArr.length; i++) {
+            if (this.diceValuesArr[i] === 1) { counter++; };
+        }
+
+        this.ones = 1 * counter;
+    }*/
+
+    countEyes() {
+        for (const eye of this.eyes) {
+            this.counter = 0; //reset counter
+            for (let i = 0; i < this.diceValuesArr.length; i++) {
+                //console.log(eye, values[i]);
+                if (this.diceValuesArr[i] === eye) { this.counter++ };
+            }
+            console.log(eye * this.counter);
+        }
+
 
     }
 
