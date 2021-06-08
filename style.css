@@ -84,3 +84,15 @@ body {
 .btn-score:hover {
     background-color: hsl(34, 65%, 60%);
 }
+
+.zero {
+    background-color: rgb(224, 90, 49);
+    width: 100%;
+}
+
+/*to remove the hover of btn-score*/
+.zero:hover, .zero:disabled {
+    background-color: rgb(224, 90, 49);
+    color: black;
+    cursor: default;
+}

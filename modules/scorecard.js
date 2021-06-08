@@ -40,6 +40,12 @@ export default class Scorecard {
         //display the results
         for (let i = 0; i < this.upperScores.length; i++) {
             this.upperScores[i].innerText = this.sums[i];
+            //if score is 0, add red background
+            if (this.sums[i] === 0) {
+                this.upperScores[i].classList.add("zero");
+                this.upperScores[i].disabled = true;
+
+            }
         }
 
     }
