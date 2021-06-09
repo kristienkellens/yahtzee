@@ -34,7 +34,5 @@ export default class Dice {
         //set img to visible
         this.diceImg.style.display = "inline";
         //console.log(this.value);
-
     }
-
 }

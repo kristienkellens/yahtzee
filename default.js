@@ -13,13 +13,10 @@ game.newGameBtn.addEventListener('click', function () {
 
 game.rollDiceBtn.addEventListener('click', function () {
     //IF start new game has not been pressed, rolldice button should be inactive
-    //console.log(game.diceArr);
-
     if (game.hasStarted) {
         game.createDice();
         //console.log(game.diceArr);
     }
-
 });
 
 game.diceArea.addEventListener('click', function (e) {
@@ -33,7 +30,6 @@ game.diceArea.addEventListener('click', function (e) {
             game.diceArr[target.dataset.index].isLocked = true;
         } else {
             game.diceArr[target.dataset.index].isLocked = false;
-
         }
     }
     //console.log(game.diceArr);
@@ -47,21 +43,16 @@ game.scoreArea.addEventListener('click', function (e) {
         target.classList.add("selected");
         target.disabled = true;
 
-        //console.log(parseInt(target.innerText));
-
         // add to total
         game.scorecard.upperTotal += parseInt(target.innerText);
-        console.log(game.scorecard.upperTotal);
 
         //display total
         game.scorecard.upperTotalTd.innerText = game.scorecard.upperTotal;
 
-        //check if we can add the bonus
+        //check to add the bonus
         if (game.scorecard.upperTotal >= 63) {
             game.scorecard.bonusTd.innerText = 63;
             game.scorecard.addBonus = true;
         }
-
-
     }
 })

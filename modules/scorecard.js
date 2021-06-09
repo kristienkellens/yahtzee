@@ -11,10 +11,10 @@ export default class Scorecard {
         this.bonusTd = document.getElementById("bonus");
 
         //Arrays
-        this.eyes = [1, 2, 3, 4, 5, 6] // to loop over eyes per dice, see calculateUpperScore()
+        this.dots = [1, 2, 3, 4, 5, 6] // each dice has 6 faces with 1 - 6 dots, see calculateUpperScore()
         this.diceValuesArr = diceValuesArr; //simple array with the final dice values, see game.js
         this.sums = []; // keep sums of upper scores
-        this.upperScores = [this.onesBtn, this.twosBtn, this.threesBtn, this.foursBtn, this.fivesBtn, this.sixesBtn] //display sums in upperScores
+        this.upperScores = [this.onesBtn, this.twosBtn, this.threesBtn, this.foursBtn, this.fivesBtn, this.sixesBtn] //display sums in upperScores DOM elements
 
         //counter used for looping over arrays
         this.counter;
@@ -26,31 +26,30 @@ export default class Scorecard {
 
     fillScorecard() {
         this.calculateUpperScore();
+        //LATER: calculate lower score combo's
 
     }
 
     calculateUpperScore() {
-        for (const eye of this.eyes) {
-            this.counter = 0; //reset counter
+        for (const dot of this.dots) {
+            this.counter = 0; //reset counter on each iteration
             for (let i = 0; i < this.diceValuesArr.length; i++) {
-                //console.log(eye, values[i]);
-                if (this.diceValuesArr[i] === eye) { this.counter++ };
+                //console.log(dot, values[i]);
+                if (this.diceValuesArr[i] === dot) { this.counter++ };
             }
-            this.sums.push(eye * this.counter);
+            this.sums.push(dot * this.counter);
             //console.log(this.sums);
         }
 
-        //display the results
+        //display the results in DOM and disable button once clicked
         for (let i = 0; i < this.upperScores.length; i++) {
             this.upperScores[i].innerText = this.sums[i];
-            //if score is 0, add red background
+            //if score is 0, add red background and disable button
             if (this.sums[i] === 0) {
                 this.upperScores[i].classList.add("zero");
                 this.upperScores[i].disabled = true;
 
             }
         }
-
     }
-
 }

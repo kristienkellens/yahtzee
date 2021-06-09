@@ -5,19 +5,20 @@ import Scorecard from './scorecard.js';
 
 export default class Game {
     constructor() {
+        //DOM elements
         this.newGameBtn = document.getElementById("btn-new");
         this.rollDiceBtn = document.getElementById("btn-roll");
         this.instructionsTxt = document.querySelector(".instructions");
         this.diceArea = document.querySelector(".dice-area");
         this.scoreArea = document.querySelector(".scoreboard-area");
         this.throwsSpan = document.querySelector(".throws");
+
+        //variables
         this.throws = 3;
         this.hasStarted = false;
         this.diceArr = [];
         this.diceValuesArr = []; //at last throw, map diceArr.values here
-        this.scorecard;
-
-
+        this.scorecard; //see createScorecard()
     }
 
     start() {
@@ -55,12 +56,10 @@ export default class Game {
         }
 
         if (this.throws === 0) { // create the scorecard
-            // put the final dice values in a new array
+            // put the final dice.values in new array diceValuesArr
             this.diceValuesArr = this.diceArr.map(dice => { return dice.value; })
-            //console.log(this.diceValuesArr);
-            this.createScorecard(this.diceValuesArr);
+            this.createScorecard();
         }
-
     }
 
     keepLockedDice(dice) {
