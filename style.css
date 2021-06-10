@@ -76,7 +76,7 @@ body {
 .btn-score {
     background-color: burlywood;
     width: 100%;
-    border: none; /*change to none*/
+    border: none;
     display: inline-block;
     cursor: pointer;
 }

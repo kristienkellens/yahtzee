@@ -27,6 +27,14 @@ export default class Scorecard {
     fillScorecard() {
         this.calculateUpperScore();
         //LATER: calculate lower score combo's
+        this.isThreeOfKind(this.diceValuesArr);
+        this.isFourOfKind(this.diceValuesArr);
+        this.isYathzee(this.diceValuesArr);
+        this.isFullHouse(this.diceValuesArr);
+        this.isSmallStraight(this.diceValuesArr); //doesnt work yet
+        this.isLargeStraight(this.diceValuesArr);
+        //still to add: chance
+        this.isChance(this.diceValuesArr);
 
     }
 
@@ -47,9 +55,58 @@ export default class Scorecard {
             //if score is 0, add red background and disable button
             if (this.sums[i] === 0) {
                 this.upperScores[i].classList.add("zero");
-                this.upperScores[i].disabled = true;
+                //this.upperScores[i].disabled = true;
 
             }
         }
     }
+
+    isThreeOfKind(diceValuesArr) {
+        if (new Set(diceValuesArr).size === 3) {
+            console.log("three of a kind")
+        }
+    }
+
+    isFourOfKind(diceValuesArr) {
+        if (new Set(diceValuesArr).size === 2) {
+            console.log("four of a kind")
+        }
+    }
+
+
+    isYathzee(diceValuesArr) {
+        if (new Set(diceValuesArr).size === 1) {
+            console.log("yathzee");
+        }
+    }
+
+    isFullHouse(diceValuesArr) {
+        if (new Set(diceValuesArr).size === 2) {
+            console.log("full house");
+        }
+    }
+
+    isSmallStraight(diceValuesArr) {//there are three possible small straights: {1, 2, 3, 4}, {2, 3, 4, 5} and {3, 4, 5, 6}
+        const diceSet = (new Set(diceValuesArr));
+        if ((diceSet.size === 4) && (diceSet.has(1 && 2 && 3 && 4) || diceSet.has(2 && 3 && 4 && 5) || diceSet.has(3 && 4 && 5 && 6))) {
+            console.log("small straight");
+        }
+    }
+
+    isLargeStraight(diceValuesArr) {
+        const diceSet = (new Set(diceValuesArr));
+        if ((diceSet.size === 5) && (!diceSet.has(1) || !diceSet.has(6))) {
+            console.log("large straight");
+        }
+    }
+
+    isChance(diceValuesArr) { //got the sum
+        let sum = diceValuesArr.reduce(function (acc, currentValue) {
+            return acc + currentValue
+        }, 0)
+
+        console.log(`Chance sum is ${sum}`);
+    }
+
+
 }
