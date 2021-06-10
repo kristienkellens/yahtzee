@@ -41,6 +41,11 @@ export default class Scorecard {
 
 
         //LATER: calculate lower score combo's
+        this.isThreeOfKind();
+        this.isYathzee();
+        this.isSmallStraight(); //not working
+        this.isLargeStraight();
+        this.isChance();
 
 
     }
@@ -81,44 +86,77 @@ export default class Scorecard {
         }*/
     }
 
-    isThreeOfKind(diceValuesArr) {
+    isThreeOfKind() {
+        if (Object.values(this.occurences).includes(3)) {
+            let sum = this.diceValuesArr.reduce(function (acc, currentValue) {
+                return acc + currentValue
+            }, 0);
+
+            document.getElementById("three-of-kind").innerText = sum;
+
+        } else {
+            document.getElementById("three-of-kind").innerText = 0;
+            document.getElementById("three-of-kind").classList.add("zero");
+        }
+    }
+
+    isFourOfKind() {
+        if (Object.values(this.occurences).includes(4)) {
+            let sum = this.diceValuesArr.reduce(function (acc, currentValue) {
+                return acc + currentValue
+            }, 0);
+
+            document.getElementById("four-of-kind").innerText = sum;
+
+        } else {
+            document.getElementById("four-of-kind").innerText = 0;
+            document.getElementById("four-of-kind").classList.add("zero");
+        }
 
     }
 
-    isFourOfKind(diceValuesArr) {
 
-    }
-
-
-    isYathzee(diceValuesArr) {
-        if (new Set(diceValuesArr).size === 1) {
+    isYathzee() {
+        if (new Set(this.diceValuesArr).size === 1) {
             console.log("yathzee");
+            document.getElementById("yahtzee").innerText = 50;
+        } else {
+            document.getElementById("yahtzee").innerText = 0;
+            document.getElementById("yahtzee").classList.add("zero");
         }
     }
 
-    isFullHouse(diceValuesArr) {
+    isFullHouse() {
+
 
     }
 
-    isSmallStraight(diceValuesArr) {//there are three possible small straights: {1, 2, 3, 4}, {2, 3, 4, 5} and {3, 4, 5, 6}
+    isSmallStraight() {//there are three possible small straights: {1, 2, 3, 4}, {2, 3, 4, 5} and {3, 4, 5, 6}
+        if (this.diceValuesArr.includes(1 && 2 && 3 && 4) || this.diceValuesArr.includes(2 && 3 && 4 && 5) || this.diceValuesArr.includes(3 && 4 && 5 && 6)) {
+            document.getElementById("sm-straight").innerText = 30;
+        } else {
+            document.getElementById("sm-straight").innerText = 0;
+            document.getElementById("sm-straight").classList.add("zero");
+        }
 
     }
 
-    isLargeStraight(diceValuesArr) {
-        const diceSet = (new Set(diceValuesArr));
+    isLargeStraight() {
+        const diceSet = (new Set(this.diceValuesArr));
         if ((diceSet.size === 5) && (!diceSet.has(1) || !diceSet.has(6))) {
-            console.log("large straight");
+            document.getElementById("l-straight").innerText = 30;
+        } else {
+            document.getElementById("l-straight").innerText = 0;
+            document.getElementById("l-straight").classList.add("zero");
         }
     }
 
-    isChance(diceValuesArr) { //got the sum
-        let sum = diceValuesArr.reduce(function (acc, currentValue) {
+    isChance() { //got the sum
+        let sum = this.diceValuesArr.reduce(function (acc, currentValue) {
             return acc + currentValue
-        }, 0)
+        }, 0);
 
-        console.log(`Chance sum is ${sum}`);
+        document.getElementById("chance").innerText = sum;
     }
-
-
 
 }
