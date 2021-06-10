@@ -42,9 +42,11 @@ export default class Scorecard {
 
         //LATER: calculate lower score combo's
         this.isThreeOfKind();
-        this.isYathzee();
+        this.isFourOfKind();
+        this.isFullHouse();
         this.isSmallStraight(); //not working
         this.isLargeStraight();
+        this.isYathzee();
         this.isChance();
 
 
@@ -118,7 +120,6 @@ export default class Scorecard {
 
     isYathzee() {
         if (new Set(this.diceValuesArr).size === 1) {
-            console.log("yathzee");
             document.getElementById("yahtzee").innerText = 50;
         } else {
             document.getElementById("yahtzee").innerText = 0;
@@ -127,6 +128,12 @@ export default class Scorecard {
     }
 
     isFullHouse() {
+        if (Object.values(this.occurences).includes(3) && Object.values(this.occurences).includes(2)) {
+            document.getElementById("full-house").innerText = 25;
+        } else {
+            document.getElementById("full-house").innerText = 0;
+            document.getElementById("full-house").classList.add("zero");
+        }
 
 
     }
