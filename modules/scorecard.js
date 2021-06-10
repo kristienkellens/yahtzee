@@ -11,34 +11,54 @@ export default class Scorecard {
         this.bonusTd = document.getElementById("bonus");
 
         //Arrays
-        this.dots = [1, 2, 3, 4, 5, 6] // each dice has 6 faces with 1 - 6 dots, see calculateUpperScore()
+        //this.dots = [1, 2, 3, 4, 5, 6] // each dice has 6 faces with 1 - 6 dots, see calculateUpperScore()
         this.diceValuesArr = diceValuesArr; //simple array with the final dice values, see game.js
-        this.sums = []; // keep sums of upper scores
+
+        this.occurences = {}; //create object of occurences per dice value
+
+        //this.sums = []; // keep sums of upper scores
         this.upperScores = [this.onesBtn, this.twosBtn, this.threesBtn, this.foursBtn, this.fivesBtn, this.sixesBtn] //display sums in upperScores DOM elements
 
         //counter used for looping over arrays
-        this.counter;
+        //this.counter;
 
         //totals
         this.upperTotal = 0;
         this.addBonus = false;
     }
 
+    calculateOccurences() { //calculates occurences per dice value
+        this.diceValuesArr.forEach(element => this.occurences[element] ? this.occurences[element]++ : (this.occurences[element] = 1));
+    }
+
     fillScorecard() {
+        this.calculateOccurences();
+        console.log(this.occurences);
+
         this.calculateUpperScore();
+
+        //console.log(Object.keys(this.occurences).length);
+
+
         //LATER: calculate lower score combo's
-        this.isThreeOfKind(this.diceValuesArr);
-        this.isFourOfKind(this.diceValuesArr);
-        this.isYathzee(this.diceValuesArr);
-        this.isFullHouse(this.diceValuesArr);
-        this.isSmallStraight(this.diceValuesArr); //doesnt work yet
-        this.isLargeStraight(this.diceValuesArr);
-        //still to add: chance
-        this.isChance(this.diceValuesArr);
+
 
     }
 
     calculateUpperScore() {
+        for (let i = 1; i < 7; i++) {
+
+            if (Object.keys(this.occurences).includes(i.toString())) { //if dice value occurs
+                this.upperScores[i - 1].innerText = i * this.occurences[i];
+            } else {
+                this.upperScores[i - 1].innerText = 0;
+                this.upperScores[i - 1].classList.add("zero");
+            }
+        }
+
+
+        /** OLD VERSION */
+        /*
         for (const dot of this.dots) {
             this.counter = 0; //reset counter on each iteration
             for (let i = 0; i < this.diceValuesArr.length; i++) {
@@ -58,19 +78,15 @@ export default class Scorecard {
                 //this.upperScores[i].disabled = true;
 
             }
-        }
+        }*/
     }
 
     isThreeOfKind(diceValuesArr) {
-        if (new Set(diceValuesArr).size === 3) {
-            console.log("three of a kind")
-        }
+
     }
 
     isFourOfKind(diceValuesArr) {
-        if (new Set(diceValuesArr).size === 2) {
-            console.log("four of a kind")
-        }
+
     }
 
 
@@ -81,16 +97,11 @@ export default class Scorecard {
     }
 
     isFullHouse(diceValuesArr) {
-        if (new Set(diceValuesArr).size === 2) {
-            console.log("full house");
-        }
+
     }
 
     isSmallStraight(diceValuesArr) {//there are three possible small straights: {1, 2, 3, 4}, {2, 3, 4, 5} and {3, 4, 5, 6}
-        const diceSet = (new Set(diceValuesArr));
-        if ((diceSet.size === 4) && (diceSet.has(1 && 2 && 3 && 4) || diceSet.has(2 && 3 && 4 && 5) || diceSet.has(3 && 4 && 5 && 6))) {
-            console.log("small straight");
-        }
+
     }
 
     isLargeStraight(diceValuesArr) {
@@ -107,6 +118,7 @@ export default class Scorecard {
 
         console.log(`Chance sum is ${sum}`);
     }
+
 
 
 }
