@@ -94,7 +94,6 @@ body {
 .zero:hover, .zero:disabled {
     background-color: rgb(224, 90, 49);
     color: black;
-    cursor: default;
 }
 
 .selected, .selected:hover, .selected:disabled {
