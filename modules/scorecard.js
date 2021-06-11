@@ -125,28 +125,38 @@ export default class Scorecard {
 
             for (let i = 0; i < Object.keys(this.occurences).length - 1; i++) {
                 //loop through all keys
+                console.log(parseInt(Object.keys(this.occurences)[i + 1]), (parseInt(Object.keys(this.occurences)[i]) + 1));
 
                 //if key[i+1] == key[i] + 1, counter++;
                 if (parseInt(Object.keys(this.occurences)[i + 1]) === (parseInt(Object.keys(this.occurences)[i]) + 1)) {
 
+
+
+                    console.log("match", consecutiveCounter);
                     consecutiveCounter++;
-                    //console.log("match", consecutiveCounter);
+
+                    //if 4 break out of loop
+                    if (consecutiveCounter === 4) break;
+
                 } else {
-                    //reset consecutive counter to 0
+                    //reset consecutive counter
                     consecutiveCounter = 1;
-                    //console.log("no match", consecutiveCounter);
+                    console.log("no match", consecutiveCounter);
                 }
             }
 
         } else {
             console.log("not a straight: either first key is +3 or set size is below 4");
-            document.getElementById("sm-straight").innerText = 0;
-            document.getElementById("sm-straight").classList.add("zero");
+
         }
 
         console.log(consecutiveCounter);
         if (consecutiveCounter === 4) { //is a small straight
             document.getElementById("sm-straight").innerText = 30;
+        } else {
+            document.getElementById("sm-straight").innerText = 0;
+            document.getElementById("sm-straight").classList.add("zero");
+
         }
 
 
