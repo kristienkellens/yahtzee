@@ -16,6 +16,7 @@ export default class Scorecard {
         this.lStraightBtn = document.getElementById("l-straight");
         this.chanceBtn = document.getElementById("chance");
         this.yahtzeeBtn = document.getElementById("yahtzee");
+        this.Totaltd = document.getElementById("total-score");
 
         //arrays and variables
         this.diceValuesArr = diceValuesArr; //array with the final dice values, see game.js
@@ -107,8 +108,6 @@ export default class Scorecard {
             this.fullHouseBtn.innerText = 0;
             this.fullHouseBtn.classList.add("zero");
         }
-
-
     }
 
     isStraight() {
@@ -159,7 +158,5 @@ export default class Scorecard {
     isChance() { //get the sum
         this.sumOfValues(this.chanceBtn)
     }
-
-
 
 }

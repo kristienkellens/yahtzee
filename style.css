@@ -73,7 +73,7 @@ body {
     background-color: hsl(34, 65%, 60%);
 }
 
-.btn-score {
+.btn-score, .btn-combo {
     background-color: burlywood;
     width: 100%;
     border: none;
@@ -81,7 +81,7 @@ body {
     cursor: pointer;
 }
 
-.btn-score:hover {
+.btn-score:hover, .btn-combo:hover {
     background-color: hsl(34, 65%, 60%);
 }
 

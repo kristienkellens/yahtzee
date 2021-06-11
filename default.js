@@ -43,16 +43,29 @@ game.scoreArea.addEventListener('click', function (e) {
         target.classList.add("selected");
         target.disabled = true;
 
-        // add to total
+        // add to sub total and totalscore
         game.scorecard.upperTotal += parseInt(target.innerText);
+        game.scorecard.totalScore += parseInt(target.innerText);
 
         //display total
         game.scorecard.upperTotalTd.innerText = game.scorecard.upperTotal;
+        game.scorecard.Totaltd.innerText = game.scorecard.totalScore;
 
         //check to add the bonus
         if (game.scorecard.upperTotal >= 63) {
             game.scorecard.bonusTd.innerText = 63;
             game.scorecard.addBonus = true;
+
+            //add bonus to totalScore
+            game.scorecard.totalScore += 63;
+            game.scorecard.Totaltd.innerText = game.scorecard.totalScore;
         }
+    }
+
+    if (target.classList.contains("btn-combo") && !target.disabled) {
+        game.scorecard.totalScore += parseInt(target.innerText);
+        game.scorecard.Totaltd.innerText = game.scorecard.totalScore;
+
+
     }
 })
