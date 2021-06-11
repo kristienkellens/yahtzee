@@ -70,7 +70,7 @@ export default class Scorecard {
     }
 
     isThreeOfKind() {
-        if (Object.values(this.occurences).includes(3)) {
+        if (Object.values(this.occurences).includes(3) && !Object.values(this.occurences).includes(2)) {
             this.sumOfValues(this.threeOfKindBtn);
 
         } else {
