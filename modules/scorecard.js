@@ -32,12 +32,14 @@ export default class Scorecard {
     }
 
     fillScorecard() {
+        console.log(this.diceValuesArr);
         this.calculateOccurences();
         console.log(this.occurences);
 
         this.calculateUpperScore();
 
         //console.log(Object.keys(this.occurences).length);
+
 
 
         //LATER: calculate lower score combo's
@@ -63,29 +65,6 @@ export default class Scorecard {
             }
         }
 
-
-        /** OLD VERSION */
-        /*
-        for (const dot of this.dots) {
-            this.counter = 0; //reset counter on each iteration
-            for (let i = 0; i < this.diceValuesArr.length; i++) {
-                //console.log(dot, values[i]);
-                if (this.diceValuesArr[i] === dot) { this.counter++ };
-            }
-            this.sums.push(dot * this.counter);
-            //console.log(this.sums);
-        }
-
-        //display the results in DOM and disable button once clicked
-        for (let i = 0; i < this.upperScores.length; i++) {
-            this.upperScores[i].innerText = this.sums[i];
-            //if score is 0, add red background and disable button
-            if (this.sums[i] === 0) {
-                this.upperScores[i].classList.add("zero");
-                //this.upperScores[i].disabled = true;
-
-            }
-        }*/
     }
 
     isThreeOfKind() {
@@ -138,20 +117,53 @@ export default class Scorecard {
 
     }
 
-    isSmallStraight() {//there are three possible small straights: {1, 2, 3, 4}, {2, 3, 4, 5} and {3, 4, 5, 6}
-        if (this.diceValuesArr.includes(1 && 2 && 3 && 4) || this.diceValuesArr.includes(2 && 3 && 4 && 5) || this.diceValuesArr.includes(3 && 4 && 5 && 6)) {
-            document.getElementById("sm-straight").innerText = 30;
+    isSmallStraight() {//there are three possible small straights: {1, 2, 3, 4}, {2, 3, 4, 5} and {3, 4, 5, 6}, first number will always be 1, 2 or 3
+        let isKeyOccurences = false;
+        if (Object.keys(this.occurences)[0] <= 3) {
+            console.log("first key is 1, 2 or 3");
+            let firstKey = parseInt(Object.keys(this.occurences)[0]);
+            for (let i = 0; i < 3; i++) {
+                //console.log("first key + i", firstKey, i, firstKey + i + 1);
+                if ((firstKey + i + 1) in this.occurences) {
+                    isKeyOccurences = true;
+                    console.log(firstKey + i + 1, isKeyOccurences);
+                } else {
+                    isKeyOccurences = false;
+                    console.log(firstKey + i + 1, isKeyOccurences);
+                    break
+                }
+            }
         } else {
+            console.log("first key is more than 3");
             document.getElementById("sm-straight").innerText = 0;
             document.getElementById("sm-straight").classList.add("zero");
         }
 
+        if (isKeyOccurences) {
+            document.getElementById("sm-straight").innerText = 30;
+        } else {
+            document.getElementById("sm-straight").innerText = 0;
+            document.getElementById("sm-straight").classList.add("zero");
+
+        }
+
+
+        /*
+
+        const diceSet = (new Set(this.diceValuesArr));
+        if (diceSet.size === 4) {
+            document.getElementById("sm-straight").innerText = 30;
+        } else {
+            document.getElementById("sm-straight").innerText = 0;
+            document.getElementById("sm-straight").classList.add("zero");
+        }*/
+
     }
 
-    isLargeStraight() {
+    isLargeStraight() { //can only be {1, 2, 3, 4, 5} or {2, 3, 4, 5, 6}
         const diceSet = (new Set(this.diceValuesArr));
         if ((diceSet.size === 5) && (!diceSet.has(1) || !diceSet.has(6))) {
-            document.getElementById("l-straight").innerText = 30;
+            document.getElementById("l-straight").innerText = 40;
         } else {
             document.getElementById("l-straight").innerText = 0;
             document.getElementById("l-straight").classList.add("zero");
