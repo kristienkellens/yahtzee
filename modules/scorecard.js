@@ -40,14 +40,11 @@ export default class Scorecard {
 
         //console.log(Object.keys(this.occurences).length);
 
-
-
         //LATER: calculate lower score combo's
         this.isThreeOfKind();
         this.isFourOfKind();
         this.isFullHouse();
-        this.isSmallStraight(); //not working
-        this.isLargeStraight();
+        this.isStraight(); //both small & large straight
         this.isYathzee();
         this.isChance();
 
@@ -117,9 +114,9 @@ export default class Scorecard {
 
     }
 
-    isSmallStraight() {//there are three possible small straights: {1, 2, 3, 4}, {2, 3, 4, 5} and {3, 4, 5, 6}, first number will always be 1, 2 or 3
-        //small straight = 4 consecutive nrs
-        let consecutiveCounter = 1; //if 4, then we have a straight
+    isStraight() {//there are three possible small straights: {1, 2, 3, 4}, {2, 3, 4, 5} and {3, 4, 5, 6}, first number will always be 1, 2 or 3. there are 2 possible options for large straight: {1,2,3,4,5} or {2,3,4,5,6}
+        //small straight = 4 consecutive nrs, large straight = 5 consecutive nrs
+        let consecutiveCounter = 1; //small straight = 4, large straight = 5
 
         if (Object.keys(this.occurences)[0] <= 3 && new Set(this.diceValuesArr).size >= 4) {
 
@@ -136,7 +133,7 @@ export default class Scorecard {
                     consecutiveCounter++;
 
                     //if 4 break out of loop
-                    if (consecutiveCounter === 4) break;
+                    //if (consecutiveCounter === 4) break;
 
                 } else {
                     //reset consecutive counter
@@ -151,85 +148,32 @@ export default class Scorecard {
         }
 
         console.log(consecutiveCounter);
-        if (consecutiveCounter === 4) { //is a small straight
-            document.getElementById("sm-straight").innerText = 30;
-        } else {
-            document.getElementById("sm-straight").innerText = 0;
-            document.getElementById("sm-straight").classList.add("zero");
+
+        switch (consecutiveCounter) {
+            case 4: //small straight
+                document.getElementById("sm-straight").innerText = 30;
+                document.getElementById("l-straight").innerText = 0;
+                document.getElementById("l-straight").classList.add("zero");
+                break;
+
+            case 5: //large straight
+                document.getElementById("l-straight").innerText = 40;
+                document.getElementById("sm-straight").innerText = 0;
+                document.getElementById("sm-straight").classList.add("zero");
+                break;
+
+            default: //no straight
+                document.getElementById("sm-straight").innerText = 0;
+                document.getElementById("sm-straight").classList.add("zero");
+                document.getElementById("l-straight").innerText = 0;
+                document.getElementById("l-straight").classList.add("zero");
+
 
         }
-
-
-
-        /*
-        //ISSUE: if first key is 1, but you do have a straight with 3,4,5,6
-        let isKeyOccurences = false;
-        if (Object.keys(this.occurences)[0] <= 3) {
-
-            console.log("first key is 1, 2 or 3");
-            for (let i = 0; i < Object.keys(this.occurences).length; i++) {
-                console.log("index is", i, "key value is", Object.keys(this.occurences)[i], "next value should be", i + parseInt(Object.keys(this.occurences)[i]), "but next key value is", Object.keys(this.occurences)[i + 1]);
-
-
-
-                // if Object.keys(this.occurences)[i + 1] === undefined, end of loop?
-
-
-            }
-
-
-            /*for (let i = 0; i < 3; i++) {
-                let keyValue = parseInt(Object.keys(this.occurences)[i+1])
-                //console.log("first key + i", firstKey, i, firstKey + i + 1);
-                if ((firstKey + i + 1) in this.occurences) {
-                    isKeyOccurences = true; //counter iso isKeyoccurences?
-                    console.log(firstKey + i + 1, isKeyOccurences);
-                } else {
-                    //what if straight starts later
-                    isKeyOccurences = false;
-                    console.log(firstKey + i + 1, isKeyOccurences);
-                    break
-                }
-
-        } else {
-            console.log("first key is more than 3");
-            document.getElementById("sm-straight").innerText = 0;
-            document.getElementById("sm-straight").classList.add("zero");
-        }
-
-        if (isKeyOccurences) {
-            document.getElementById("sm-straight").innerText = 30;
-        } else {
-            document.getElementById("sm-straight").innerText = 0;
-            document.getElementById("sm-straight").classList.add("zero");
-
-        }*/
-
-
-        /*
-
-        const diceSet = (new Set(this.diceValuesArr));
-        if (diceSet.size === 4) {
-            document.getElementById("sm-straight").innerText = 30;
-        } else {
-            document.getElementById("sm-straight").innerText = 0;
-            document.getElementById("sm-straight").classList.add("zero");
-        }*/
 
     }
 
-    isLargeStraight() { //can only be {1, 2, 3, 4, 5} or {2, 3, 4, 5, 6}
-        const diceSet = (new Set(this.diceValuesArr));
-        if ((diceSet.size === 5) && (!diceSet.has(1) || !diceSet.has(6))) {
-            console.log("is large straight");
-            document.getElementById("l-straight").innerText = 40;
-        } else {
-            document.getElementById("l-straight").innerText = 0;
-            document.getElementById("l-straight").classList.add("zero");
-        }
-    }
-
-    isChance() { //got the sum
+    isChance() { //get the sum
         let sum = this.diceValuesArr.reduce(function (acc, currentValue) {
             return acc + currentValue
         }, 0);
