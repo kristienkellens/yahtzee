@@ -9,22 +9,23 @@ export default class Scorecard {
         this.sixesBtn = document.getElementById("sixes");
         this.upperTotalTd = document.getElementById("upper-total");
         this.bonusTd = document.getElementById("bonus");
+        this.threeOfKindBtn = document.getElementById("three-of-kind");
+        this.fourOfKindBtn = document.getElementById("four-of-kind");
+        this.fullHouseBtn = document.getElementById("full-house");
+        this.smStraightBtn = document.getElementById("sm-straight");
+        this.lStraightBtn = document.getElementById("l-straight");
+        this.chanceBtn = document.getElementById("chance");
+        this.yahtzeeBtn = document.getElementById("yahtzee");
 
-        //Arrays
-        //this.dots = [1, 2, 3, 4, 5, 6] // each dice has 6 faces with 1 - 6 dots, see calculateUpperScore()
-        this.diceValuesArr = diceValuesArr; //simple array with the final dice values, see game.js
-
-        this.occurences = {}; //create object of occurences per dice value
-
-        //this.sums = []; // keep sums of upper scores
+        //arrays and variables
+        this.diceValuesArr = diceValuesArr; //array with the final dice values, see game.js
+        this.occurences = {}; //object with number of dice values per value
         this.upperScores = [this.onesBtn, this.twosBtn, this.threesBtn, this.foursBtn, this.fivesBtn, this.sixesBtn] //display sums in upperScores DOM elements
-
-        //counter used for looping over arrays
-        //this.counter;
 
         //totals
         this.upperTotal = 0;
         this.addBonus = false;
+        this.totalScore = 0;
     }
 
     calculateOccurences() { //calculates occurences per dice value
@@ -32,23 +33,19 @@ export default class Scorecard {
     }
 
     fillScorecard() {
-        console.log(this.diceValuesArr);
+        //console.log(this.diceValuesArr);
         this.calculateOccurences();
-        console.log(this.occurences);
+        //console.log(this.occurences);
 
         this.calculateUpperScore();
 
-        //console.log(Object.keys(this.occurences).length);
-
-        //LATER: calculate lower score combo's
+        //calculate score combo's
         this.isThreeOfKind();
         this.isFourOfKind();
         this.isFullHouse();
         this.isStraight(); //both small & large straight
         this.isYathzee();
         this.isChance();
-
-
     }
 
     calculateUpperScore() {
@@ -61,34 +58,34 @@ export default class Scorecard {
                 this.upperScores[i - 1].classList.add("zero");
             }
         }
+    }
+
+    sumOfValues(DomElement) {
+        let sum = this.diceValuesArr.reduce(function (acc, currentValue) {
+            return acc + currentValue
+        }, 0);
+
+        DomElement.innerText = sum;
 
     }
 
     isThreeOfKind() {
         if (Object.values(this.occurences).includes(3)) {
-            let sum = this.diceValuesArr.reduce(function (acc, currentValue) {
-                return acc + currentValue
-            }, 0);
-
-            document.getElementById("three-of-kind").innerText = sum;
+            this.sumOfValues(this.threeOfKindBtn);
 
         } else {
-            document.getElementById("three-of-kind").innerText = 0;
-            document.getElementById("three-of-kind").classList.add("zero");
+            this.threeOfKindBtn.innerText = 0;
+            this.threeOfKindBtn.classList.add("zero");
         }
     }
 
     isFourOfKind() {
         if (Object.values(this.occurences).includes(4)) {
-            let sum = this.diceValuesArr.reduce(function (acc, currentValue) {
-                return acc + currentValue
-            }, 0);
-
-            document.getElementById("four-of-kind").innerText = sum;
+            this.sumOfValues(this.fourOfKindBtn);
 
         } else {
-            document.getElementById("four-of-kind").innerText = 0;
-            document.getElementById("four-of-kind").classList.add("zero");
+            this.fourOfKindBtn.innerText = 0;
+            this.fourOfKindBtn.classList.add("zero");
         }
 
     }
@@ -96,26 +93,25 @@ export default class Scorecard {
 
     isYathzee() {
         if ((new Set(this.diceValuesArr).size === 1)) {
-            document.getElementById("yahtzee").innerText = 50;
+            this.yahtzeeBtn.innerText = 50;
         } else {
-            document.getElementById("yahtzee").innerText = 0;
-            document.getElementById("yahtzee").classList.add("zero");
+            this.yahtzeeBtn.innerText = 0;
+            this.yahtzeeBtn.classList.add("zero");
         }
     }
 
     isFullHouse() {
         if (Object.values(this.occurences).includes(3) && Object.values(this.occurences).includes(2)) {
-            document.getElementById("full-house").innerText = 25;
+            this.fullHouseBtn.innerText = 25;
         } else {
-            document.getElementById("full-house").innerText = 0;
-            document.getElementById("full-house").classList.add("zero");
+            this.fullHouseBtn.innerText = 0;
+            this.fullHouseBtn.classList.add("zero");
         }
 
 
     }
 
-    isStraight() {//there are three possible small straights: {1, 2, 3, 4}, {2, 3, 4, 5} and {3, 4, 5, 6}, first number will always be 1, 2 or 3. there are 2 possible options for large straight: {1,2,3,4,5} or {2,3,4,5,6}
-        //small straight = 4 consecutive nrs, large straight = 5 consecutive nrs
+    isStraight() {
         let consecutiveCounter = 1; //small straight = 4, large straight = 5
 
         if (Object.keys(this.occurences)[0] <= 3 && new Set(this.diceValuesArr).size >= 4) {
@@ -126,59 +122,44 @@ export default class Scorecard {
 
                 //if key[i+1] == key[i] + 1, counter++;
                 if (parseInt(Object.keys(this.occurences)[i + 1]) === (parseInt(Object.keys(this.occurences)[i]) + 1)) {
-
-
-
-                    console.log("match", consecutiveCounter);
+                    //console.log("match", consecutiveCounter);
                     consecutiveCounter++;
-
-                    //if 4 break out of loop
-                    //if (consecutiveCounter === 4) break;
 
                 } else {
                     //reset consecutive counter
                     consecutiveCounter = 1;
-                    console.log("no match", consecutiveCounter);
                 }
             }
 
-        } else {
-            console.log("not a straight: either first key is +3 or set size is below 4");
-
         }
 
-        console.log(consecutiveCounter);
+        //console.log(consecutiveCounter);
 
         switch (consecutiveCounter) {
             case 4: //small straight
-                document.getElementById("sm-straight").innerText = 30;
-                document.getElementById("l-straight").innerText = 0;
-                document.getElementById("l-straight").classList.add("zero");
+                this.smStraightBtn.innerText = 30;
+                this.lStraightBtn.innerText = 0;
+                this.lStraightBtn.classList.add("zero");
                 break;
 
             case 5: //large straight
-                document.getElementById("l-straight").innerText = 40;
-                document.getElementById("sm-straight").innerText = 0;
-                document.getElementById("sm-straight").classList.add("zero");
+                this.lStraightBtn.innerText = 40;
+                this.smStraightBtn.innerText = 0;
+                this.smStraightBtn.classList.add("zero");
                 break;
 
             default: //no straight
-                document.getElementById("sm-straight").innerText = 0;
-                document.getElementById("sm-straight").classList.add("zero");
-                document.getElementById("l-straight").innerText = 0;
-                document.getElementById("l-straight").classList.add("zero");
-
-
+                this.smStraightBtn.innerText = 0;
+                this.smStraightBtn.classList.add("zero");
+                this.lStraightBtn.innerText = 0;
+                this.lStraightBtn.classList.add("zero");
         }
-
     }
 
     isChance() { //get the sum
-        let sum = this.diceValuesArr.reduce(function (acc, currentValue) {
-            return acc + currentValue
-        }, 0);
-
-        document.getElementById("chance").innerText = sum;
+        this.sumOfValues(this.chanceBtn)
     }
+
+
 
 }
