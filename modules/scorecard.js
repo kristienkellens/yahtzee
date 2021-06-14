@@ -17,13 +17,12 @@ export default class Scorecard {
 
         //arrays and variables
         this.diceValuesArr = diceValuesArr; //array with the final dice values, see game.js
-        this.occurences = {}; //object with number of dice values per value
+        this.occurences = {}; //object with occurence of each dice values e.g. {1: 3, 2:1, 5:1}
         this.upperScores = [this.onesBtn, this.twosBtn, this.threesBtn, this.foursBtn, this.fivesBtn, this.sixesBtn]
-
 
     }
 
-    calculateOccurences() { //calculates occurences per dice value
+    calculateOccurences() { //fill in this.occurences based on this.diceValuesArr
         this.diceValuesArr.forEach(element => this.occurences[element] ? this.occurences[element]++ : (this.occurences[element] = 1));
     }
 
@@ -81,7 +80,7 @@ export default class Scorecard {
 
     sumOfValues(DomElement) {
         let sum = this.diceValuesArr.reduce(function (acc, currentValue) {
-            return acc + currentValue
+            return acc + currentValue;
         }, 0);
 
         DomElement.innerText = sum;
@@ -108,7 +107,6 @@ export default class Scorecard {
         }
 
     }
-
 
     isYathzee() {
         if ((new Set(this.diceValuesArr).size === 1)) {

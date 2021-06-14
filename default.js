@@ -51,26 +51,10 @@ game.scoreArea.addEventListener('click', function (e) {
         game.totalTd.innerText = game.totalScore;
 
         //check to add the bonus
-        if (game.upperTotal >= 63) {
-            game.bonusTd.innerText = 63;
-            game.addBonus = true;
-
-            //add bonus to totalScore
-            game.totalScore += 63;
-            game.totalTd.innerText = game.totalScore;
-        }
+        game.addBonus();
 
         //reset throws and add turn
-        game.throws = 3;
-        game.throwsSpan.innerText = game.throws;
-        game.diceArr.length = 0;
-        game.dicesDiv.innerHTML = " ";
-        game.turns++;
-
-        //stop game if turns = 13
-        if (game.turns === 13) {
-            game.rollDiceBtn.disabled = true;
-        }
+        game.newTurn()
 
 
     }
@@ -84,15 +68,6 @@ game.scoreArea.addEventListener('click', function (e) {
         target.disabled = true;
 
         //reset throws and add turn
-        game.throws = 3;
-        game.throwsSpan.innerText = game.throws;
-        game.diceArr.length = 0;
-        game.dicesDiv.innerHTML = " ";
-        game.turns++;
-
-        //stop game if turns = 13
-        if (game.turns === 13) {
-            game.rollDiceBtn.disabled = true;
-        }
+        game.newTurn();
     }
 })

@@ -88,4 +88,28 @@ export default class Game {
         //fill in the scorecard
         this.scorecard.fillScorecard();
     }
+
+    addBonus() {
+        if (this.upperTotal >= 63) {
+            this.bonusTd.innerText = 63;
+            this.addBonus = true;
+
+            //add bonus to totalScore
+            this.totalScore += 63;
+            this.totalTd.innerText = this.totalScore;
+        }
+    }
+
+    newTurn() {
+        this.throws = 3;
+        this.throwsSpan.innerText = this.throws;
+        this.diceArr.length = 0;
+        this.dicesDiv.innerHTML = " ";
+        this.turns++;
+
+        //stop game if turns = 13
+        if (this.turns === 13) {
+            this.rollDiceBtn.disabled = true;
+        }
+    }
 }
