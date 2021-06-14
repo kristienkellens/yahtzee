@@ -17,7 +17,6 @@ export default class Game {
         this.bonusTd = document.getElementById("bonus");
         this.totalTd = document.getElementById("total-score");
 
-
         //variables
         this.throws = 3;
         this.turns = 0;
@@ -30,7 +29,6 @@ export default class Game {
         this.upperTotal = 0;
         this.addBonus = false;
         this.totalScore = 0;
-
     }
 
     start() {
@@ -55,11 +53,14 @@ export default class Game {
                 }
 
                 //roll each dice
-                this.diceArr.forEach(dice => { dice.roll(); });
+                this.diceArr.forEach(dice => {
+                    dice.roll();
+                });
+
             } else {
                 this.diceArr.forEach(dice => {
                     this.keepLockedDice(dice);
-                })
+                });
             }
 
             //count throws
@@ -68,9 +69,10 @@ export default class Game {
 
         }
 
-
         // put the final dice.values in new array diceValuesArr
-        this.diceValuesArr = this.diceArr.map(dice => { return dice.value; })
+        this.diceValuesArr = this.diceArr.map(dice => {
+            return dice.value;
+        });
         //fill in score card
         this.createScorecard();
 

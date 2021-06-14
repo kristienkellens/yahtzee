@@ -16,10 +16,9 @@ export default class Scorecard {
         this.yahtzeeBtn = document.getElementById("yahtzee");
 
         //arrays and variables
-        this.diceValuesArr = diceValuesArr; //array with the final dice values, see game.js
+        this.diceValuesArr = diceValuesArr; //array with the final dice values e.g [1, 5, 2, 1, 1]
         this.occurences = {}; //object with occurence of each dice values e.g. {1: 3, 2:1, 5:1}
         this.upperScores = [this.onesBtn, this.twosBtn, this.threesBtn, this.foursBtn, this.fivesBtn, this.sixesBtn]
-
     }
 
     calculateOccurences() { //fill in this.occurences based on this.diceValuesArr
@@ -27,14 +26,12 @@ export default class Scorecard {
     }
 
     fillScorecard() {
-        //console.log(this.diceValuesArr);
         this.calculateOccurences();
         //console.log(this.occurences);
 
         this.calculateUpperScore();
 
-
-        //calculate score combo's
+        //calculate score combo's. If Dom Element has already been added to scorecard (= CSS class .selected), skip calculation
         if (!this.threeOfKindBtn.classList.contains("selected")) {
             this.threeOfKindBtn.classList.remove("zero");
             this.isThreeOfKind();
@@ -105,7 +102,6 @@ export default class Scorecard {
             this.fourOfKindBtn.innerText = 0;
             this.fourOfKindBtn.classList.add("zero");
         }
-
     }
 
     isYathzee() {
@@ -135,17 +131,16 @@ export default class Scorecard {
                 //loop through all keys
                 //console.log(parseInt(Object.keys(this.occurences)[i + 1]), (parseInt(Object.keys(this.occurences)[i]) + 1));
 
-                //if key[i+1] == key[i] + 1, counter++;
+                //if key[i+1] and key[i] + 1 match, consecutiveCounter++;
                 if (parseInt(Object.keys(this.occurences)[i + 1]) === (parseInt(Object.keys(this.occurences)[i]) + 1)) {
                     //console.log("match", consecutiveCounter);
                     consecutiveCounter++;
 
                 } else {
-                    //reset consecutive counter
+                    //no match, reset consecutive counter
                     consecutiveCounter = 1;
                 }
             }
-
         }
 
         //console.log(consecutiveCounter);
@@ -161,7 +156,6 @@ export default class Scorecard {
                     this.lStraightBtn.innerText = 0;
                     this.lStraightBtn.classList.add("zero");
                 }
-
                 break;
 
             case 5: //large straight
@@ -189,8 +183,7 @@ export default class Scorecard {
         }
     }
 
-    isChance() { //get the sum
-        this.sumOfValues(this.chanceBtn)
+    isChance() {
+        this.sumOfValues(this.chanceBtn);
     }
-
 }

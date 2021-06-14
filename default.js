@@ -14,7 +14,6 @@ game.rollDiceBtn.addEventListener('click', function () {
     //IF start new game has not been pressed, rolldice button should be inactive
     if (game.hasStarted) {
         game.createDice();
-        //console.log(game.diceArr);
     }
 });
 
@@ -31,8 +30,7 @@ game.diceArea.addEventListener('click', function (e) {
             game.diceArr[target.dataset.index].isLocked = false;
         }
     }
-    //console.log(game.diceArr);
-})
+});
 
 game.scoreArea.addEventListener('click', function (e) {
     const target = e.target;
@@ -54,9 +52,7 @@ game.scoreArea.addEventListener('click', function (e) {
         game.addBonus();
 
         //reset throws and add turn
-        game.newTurn()
-
-
+        game.newTurn();
     }
 
     if (target.classList.contains("btn-combo") && !target.disabled) {
@@ -70,4 +66,4 @@ game.scoreArea.addEventListener('click', function (e) {
         //reset throws and add turn
         game.newTurn();
     }
-})
+});
