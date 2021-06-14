@@ -44,11 +44,11 @@ game.scoreArea.addEventListener('click', function (e) {
 
         // add to sub total and totalscore
         game.scorecard.upperTotal += parseInt(target.innerText);
-        game.scorecard.totalScore += parseInt(target.innerText);
+        game.totalScore += parseInt(target.innerText);
 
         //display total
         game.scorecard.upperTotalTd.innerText = game.scorecard.upperTotal;
-        game.scorecard.Totaltd.innerText = game.scorecard.totalScore;
+        game.totalTd.innerText = game.totalScore;
 
         //check to add the bonus
         if (game.scorecard.upperTotal >= 63) {
@@ -56,18 +56,28 @@ game.scoreArea.addEventListener('click', function (e) {
             game.scorecard.addBonus = true;
 
             //add bonus to totalScore
-            game.scorecard.totalScore += 63;
-            game.scorecard.Totaltd.innerText = game.scorecard.totalScore;
+            game.totalScore += 63;
+            game.totalTd.innerText = game.totalScore;
         }
+
+        //reset throws
+        game.throws = 3;
+        game.throwsSpan.innerText = game.throws;
+
+
     }
 
     if (target.classList.contains("btn-combo") && !target.disabled) {
-        game.scorecard.totalScore += parseInt(target.innerText);
-        game.scorecard.Totaltd.innerText = game.scorecard.totalScore;
+        game.totalScore += parseInt(target.innerText);
+        game.totalTd.innerText = game.totalScore;
 
         //add green class
         target.classList.add("selected");
         target.disabled = true;
+
+        //reset throws
+        game.throws = 3;
+        game.throwsSpan.innerText = game.throws;
 
 
     }

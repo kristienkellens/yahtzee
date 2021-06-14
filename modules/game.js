@@ -12,6 +12,8 @@ export default class Game {
         this.diceArea = document.querySelector(".dice-area");
         this.scoreArea = document.querySelector(".scoreboard-area");
         this.throwsSpan = document.querySelector(".throws");
+        this.totalTd = document.getElementById("total-score");
+
 
         //variables
         this.throws = 3;
@@ -19,6 +21,8 @@ export default class Game {
         this.diceArr = [];
         this.diceValuesArr = []; //after each throw, map diceArr.values here
         this.scorecard; //see createScorecard()
+        this.totalScore = 0;
+
     }
 
     start() {

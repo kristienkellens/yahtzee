@@ -16,7 +16,6 @@ export default class Scorecard {
         this.lStraightBtn = document.getElementById("l-straight");
         this.chanceBtn = document.getElementById("chance");
         this.yahtzeeBtn = document.getElementById("yahtzee");
-        this.Totaltd = document.getElementById("total-score");
 
         //arrays and variables
         this.diceValuesArr = diceValuesArr; //array with the final dice values, see game.js
@@ -26,7 +25,6 @@ export default class Scorecard {
         //totals
         this.upperTotal = 0;
         this.addBonus = false;
-        this.totalScore = 0;
     }
 
     calculateOccurences() { //calculates occurences per dice value
@@ -142,7 +140,7 @@ export default class Scorecard {
 
             for (let i = 0; i < Object.keys(this.occurences).length - 1; i++) {
                 //loop through all keys
-                console.log(parseInt(Object.keys(this.occurences)[i + 1]), (parseInt(Object.keys(this.occurences)[i]) + 1));
+                //console.log(parseInt(Object.keys(this.occurences)[i + 1]), (parseInt(Object.keys(this.occurences)[i]) + 1));
 
                 //if key[i+1] == key[i] + 1, counter++;
                 if (parseInt(Object.keys(this.occurences)[i + 1]) === (parseInt(Object.keys(this.occurences)[i]) + 1)) {
