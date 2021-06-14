@@ -7,8 +7,6 @@ export default class Scorecard {
         this.foursBtn = document.getElementById("fours");
         this.fivesBtn = document.getElementById("fives");
         this.sixesBtn = document.getElementById("sixes");
-        this.upperTotalTd = document.getElementById("upper-total");
-        this.bonusTd = document.getElementById("bonus");
         this.threeOfKindBtn = document.getElementById("three-of-kind");
         this.fourOfKindBtn = document.getElementById("four-of-kind");
         this.fullHouseBtn = document.getElementById("full-house");
@@ -22,9 +20,7 @@ export default class Scorecard {
         this.occurences = {}; //object with number of dice values per value
         this.upperScores = [this.onesBtn, this.twosBtn, this.threesBtn, this.foursBtn, this.fivesBtn, this.sixesBtn]
 
-        //totals
-        this.upperTotal = 0;
-        this.addBonus = false;
+
     }
 
     calculateOccurences() { //calculates occurences per dice value
@@ -73,14 +69,13 @@ export default class Scorecard {
 
             if (!this.upperScores[i - 1].classList.contains("selected")) {
                 if (Object.keys(this.occurences).includes(i.toString())) { //if dice value occurs & is not already used on scorecard
+                    this.upperScores[i - 1].classList.remove("zero");
                     this.upperScores[i - 1].innerText = i * this.occurences[i];
                 } else {
                     this.upperScores[i - 1].innerText = 0;
                     this.upperScores[i - 1].classList.add("zero");
                 }
             }
-
-
         }
     }
 

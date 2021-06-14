@@ -13,15 +13,22 @@ export default class Game {
         this.dicesDiv = document.querySelector(".dices");
         this.scoreArea = document.querySelector(".scoreboard-area");
         this.throwsSpan = document.querySelector(".throws");
+        this.upperTotalTd = document.getElementById("upper-total");
+        this.bonusTd = document.getElementById("bonus");
         this.totalTd = document.getElementById("total-score");
 
 
         //variables
         this.throws = 3;
+        this.turns = 0;
         this.hasStarted = false;
         this.diceArr = [];
         this.diceValuesArr = []; //after each throw, map diceArr.values here
         this.scorecard; //see createScorecard()
+
+        //totals
+        this.upperTotal = 0;
+        this.addBonus = false;
         this.totalScore = 0;
 
     }
@@ -58,6 +65,7 @@ export default class Game {
             //count throws
             this.throws -= 1;
             this.throwsSpan.innerText = this.throws;
+
         }
 
 
