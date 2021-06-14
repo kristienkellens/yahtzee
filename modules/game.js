@@ -27,7 +27,6 @@ export default class Game {
 
         //totals
         this.upperTotal = 0;
-        this.addBonus = false;
         this.totalScore = 0;
     }
 
@@ -92,14 +91,12 @@ export default class Game {
     }
 
     addBonus() {
-        if (this.upperTotal >= 63) {
-            this.bonusTd.innerText = 63;
-            this.addBonus = true;
 
-            //add bonus to totalScore
-            this.totalScore += 63;
-            this.totalTd.innerText = this.totalScore;
-        }
+        this.bonusTd.innerText = 63;
+
+        this.totalScore += 63;
+        this.totalTd.innerText = this.totalScore;
+
     }
 
     newTurn() {

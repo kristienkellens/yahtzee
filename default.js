@@ -49,7 +49,9 @@ game.scoreArea.addEventListener('click', function (e) {
         game.totalTd.innerText = game.totalScore;
 
         //check to add the bonus
-        game.addBonus();
+        if (game.upperTotal >= 63) {
+            game.addBonus();
+        }
 
         //reset throws and add turn
         game.newTurn();
