@@ -63,6 +63,8 @@ game.scoreArea.addEventListener('click', function (e) {
         //reset throws
         game.throws = 3;
         game.throwsSpan.innerText = game.throws;
+        game.diceArr.length = 0;
+        game.dicesDiv.innerHTML = " ";
 
 
     }
@@ -78,6 +80,8 @@ game.scoreArea.addEventListener('click', function (e) {
         //reset throws
         game.throws = 3;
         game.throwsSpan.innerText = game.throws;
+        game.diceArr.length = 0;
+        game.dicesDiv.innerHTML = " ";
 
 
     }

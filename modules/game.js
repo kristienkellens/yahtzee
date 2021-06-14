@@ -10,6 +10,7 @@ export default class Game {
         this.rollDiceBtn = document.getElementById("btn-roll");
         this.instructionsTxt = document.querySelector(".instructions");
         this.diceArea = document.querySelector(".dice-area");
+        this.dicesDiv = document.querySelector(".dices");
         this.scoreArea = document.querySelector(".scoreboard-area");
         this.throwsSpan = document.querySelector(".throws");
         this.totalTd = document.getElementById("total-score");
