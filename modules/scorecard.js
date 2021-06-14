@@ -21,7 +21,7 @@ export default class Scorecard {
         //arrays and variables
         this.diceValuesArr = diceValuesArr; //array with the final dice values, see game.js
         this.occurences = {}; //object with number of dice values per value
-        this.upperScores = [this.onesBtn, this.twosBtn, this.threesBtn, this.foursBtn, this.fivesBtn, this.sixesBtn] //display sums in upperScores DOM elements
+        this.upperScores = [this.onesBtn, this.twosBtn, this.threesBtn, this.foursBtn, this.fivesBtn, this.sixesBtn]
 
         //totals
         this.upperTotal = 0;
@@ -40,24 +40,49 @@ export default class Scorecard {
 
         this.calculateUpperScore();
 
+
         //calculate score combo's
-        this.isThreeOfKind();
-        this.isFourOfKind();
-        this.isFullHouse();
+        if (!this.threeOfKindBtn.classList.contains("selected")) {
+            this.threeOfKindBtn.classList.remove("zero");
+            this.isThreeOfKind();
+        }
+
+        if (!this.fourOfKindBtn.classList.contains("selected")) {
+            this.fourOfKindBtn.classList.remove("zero");
+            this.isFourOfKind();
+        }
+
+        if (!this.fullHouseBtn.classList.contains("selected")) {
+            this.fullHouseBtn.classList.remove("zero");
+            this.isFullHouse();
+        }
+
         this.isStraight(); //both small & large straight
-        this.isYathzee();
-        this.isChance();
+
+        if (!this.yahtzeeBtn.classList.contains("selected")) {
+            this.yahtzeeBtn.classList.remove("zero");
+            this.isYathzee();
+        }
+
+        if (!this.chanceBtn.classList.contains("selected")) {
+            this.chanceBtn.classList.remove("zero");
+            this.isChance();
+        }
     }
 
     calculateUpperScore() {
         for (let i = 1; i < 7; i++) {
 
-            if (Object.keys(this.occurences).includes(i.toString())) { //if dice value occurs
-                this.upperScores[i - 1].innerText = i * this.occurences[i];
-            } else {
-                this.upperScores[i - 1].innerText = 0;
-                this.upperScores[i - 1].classList.add("zero");
+            if (!this.upperScores[i - 1].classList.contains("selected")) {
+                if (Object.keys(this.occurences).includes(i.toString())) { //if dice value occurs & is not already used on scorecard
+                    this.upperScores[i - 1].innerText = i * this.occurences[i];
+                } else {
+                    this.upperScores[i - 1].innerText = 0;
+                    this.upperScores[i - 1].classList.add("zero");
+                }
             }
+
+
         }
     }
 
@@ -136,22 +161,40 @@ export default class Scorecard {
 
         switch (consecutiveCounter) {
             case 4: //small straight
-                this.smStraightBtn.innerText = 30;
-                this.lStraightBtn.innerText = 0;
-                this.lStraightBtn.classList.add("zero");
+                if (!this.smStraightBtn.classList.contains("selected")) {
+                    this.smStraightBtn.classList.remove("zero");
+                    this.smStraightBtn.innerText = 30;
+                }
+
+                if (!this.lStraightBtn.classList.contains("selected")) {
+                    this.lStraightBtn.innerText = 0;
+                    this.lStraightBtn.classList.add("zero");
+                }
+
                 break;
 
             case 5: //large straight
-                this.lStraightBtn.innerText = 40;
-                this.smStraightBtn.innerText = 0;
-                this.smStraightBtn.classList.add("zero");
+                if (!this.lStraightBtn.classList.contains("selected")) {
+                    this.lStraightBtn.classList.remove("zero");
+                    this.lStraightBtn.innerText = 40;
+                }
+
+                if (!this.smStraightBtn.classList.contains("selected")) {
+                    this.smStraightBtn.innerText = 0;
+                    this.smStraightBtn.classList.add("zero");
+                }
                 break;
 
             default: //no straight
-                this.smStraightBtn.innerText = 0;
-                this.smStraightBtn.classList.add("zero");
-                this.lStraightBtn.innerText = 0;
-                this.lStraightBtn.classList.add("zero");
+                if (!this.smStraightBtn.classList.contains("selected")) {
+                    this.smStraightBtn.innerText = 0;
+                    this.smStraightBtn.classList.add("zero");
+                }
+
+                if (!this.lStraightBtn.classList.contains("selected")) {
+                    this.lStraightBtn.innerText = 0;
+                    this.lStraightBtn.classList.add("zero");
+                }
         }
     }
 

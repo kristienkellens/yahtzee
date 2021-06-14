@@ -17,7 +17,7 @@ export default class Game {
         this.throws = 3;
         this.hasStarted = false;
         this.diceArr = [];
-        this.diceValuesArr = []; //at last throw, map diceArr.values here
+        this.diceValuesArr = []; //after each throw, map diceArr.values here
         this.scorecard; //see createScorecard()
     }
 
@@ -55,11 +55,12 @@ export default class Game {
             this.throwsSpan.innerText = this.throws;
         }
 
-        if (this.throws === 0) { // create the scorecard
-            // put the final dice.values in new array diceValuesArr
-            this.diceValuesArr = this.diceArr.map(dice => { return dice.value; })
-            this.createScorecard();
-        }
+
+        // put the final dice.values in new array diceValuesArr
+        this.diceValuesArr = this.diceArr.map(dice => { return dice.value; })
+        //fill in score card
+        this.createScorecard();
+
     }
 
     keepLockedDice(dice) {
