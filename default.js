@@ -65,6 +65,10 @@ game.scoreArea.addEventListener('click', function (e) {
         game.scorecard.totalScore += parseInt(target.innerText);
         game.scorecard.Totaltd.innerText = game.scorecard.totalScore;
 
+        //add green class
+        target.classList.add("selected");
+        target.disabled = true;
+
 
     }
 })
