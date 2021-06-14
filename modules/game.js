@@ -91,12 +91,9 @@ export default class Game {
     }
 
     addBonus() {
-
         this.bonusTd.innerText = 63;
-
         this.totalScore += 63;
         this.totalTd.innerText = this.totalScore;
-
     }
 
     newTurn() {
